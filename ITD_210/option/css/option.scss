@@ -1,0 +1,122 @@
+$font: "Cabin", sans-serif;
+
+body {
+  border: 0.1rem solid rgb(150, 150, 150);
+  background-color: rgba(249, 249, 249, 0.5);
+  font-family: $font;
+  font-size: 1em;
+}
+
+main {
+  display: flex;
+  flex-direction: row;
+}
+
+h2 {
+  display: flex;
+  justify-content: center;
+  text-shadow: 2px -4px 0px #bcbcbc;
+}
+
+img {
+  display: flex;
+  max-width: 100%;
+  height: auto;
+  padding: 0.25em;
+  box-shadow: 5px 10px 18px #888888;
+  filter: saturate(60%) blur(.15px);
+}
+
+.text-section {
+  padding: 1.5em;
+  align-items: center;
+  justify-content: center;
+}
+
+footer {
+  background-color: rgba(71, 72, 79, 80%);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  padding: 1rem;
+}
+
+.box-shadow {
+  box-shadow: 2px -4px 0px #bcbcbc;
+}
+
+.main-navigation {
+  background-color: rgba(71, 72, 79, 80%);
+  & ul {
+    border-bottom: 1px solid black;
+    list-style: none;
+    margin: 0 0 1.5rem 0;
+    padding: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    & li {
+      flex: 1 1 auto;
+      background-image: linear-gradient(
+        to bottom,
+        transparent 50%,
+        rgba(108, 135, 178, 1) 30%,
+        rgba(108, 135, 178, 1) 10%,
+        rgba(232, 122, 122, 1) 100%
+      );
+      background-size: 100% 200%;
+      background-position: top center;
+      color: #666;
+      display: block;
+      text-align: center;
+      text-decoration: none;
+      transition: all 0.25s ease-in-out;
+      &:hover {
+        background-position: bottom center;
+        color: rgba(0, 0, 0, 0.75);
+      }
+      & a {
+        color: white;
+        display: block;
+        padding: 1rem 0;
+        transition: all 0.25s ease-in-out;
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+@media all and (max-width: 600px) {
+  body {
+    font-size: 0.85em;
+  }
+  main,
+  section {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .main-navigation {
+    display: flex;
+    flex-flow: column wrap;
+    padding: 0;
+  }
+
+  .main-navigation a {
+    justify-content: center;
+    text-align: center;
+    padding: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .main-navigation li:last-of-type a {
+    justify-content: center;
+    border-bottom: none;
+  }
+}

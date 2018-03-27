@@ -1,0 +1,44 @@
+* {
+	box-sizing: border-box;
+}
+h1, h2, h3, h4, h5, h6 {
+	text-align: center;
+}
+
+section {
+	border: inset #333 thin;
+	padding: 1em;
+}
+
+main {
+	display: flex;
+	flex-direction: column;
+}
+
+.animals main{
+	background-color: lightskyblue;
+}
+
+.minerals main{
+	background-color: pink;
+}
+
+.vegetables main {
+	background-color: lightyellow;
+}
+
+@media (min-width: 750px){
+	main {
+		flex-direction: row;
+	}
+}
+
+img {
+    width: 75%;
+    height: 10%; 
+}
+
+.flex-container {
+    display: flex;
+    justify-content: center;
+}

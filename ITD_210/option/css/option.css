@@ -1,0 +1,254 @@
+body {
+    border: 0.1rem solid #969696;
+    background-color: rgba(249, 249, 249, 0.5);
+    font-family: "Cabin", sans-serif;
+    font-size: 1em;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+}
+
+h2 {
+    display: flex;
+    justify-content: center;
+    text-shadow: 2px -4px 0px #bcbcbc;
+}
+
+img {
+    max-width: 95%;
+    height: auto;
+    padding: 1em;
+    box-shadow: 5px 10px 18px #888888;
+    filter: saturate(60%) blur(0.15px);
+}
+
+.text-section {
+    padding: 1.5em;
+    align-items: center;
+    justify-content: center;
+}
+
+footer {
+    background-color: #47484f;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    padding: 1rem;
+}
+
+.box-shadow {
+    box-shadow: 2px -4px 0px #bcbcbc;
+}
+
+.main-navigation {
+    background-color: #47484f;
+}
+.main-navigation ul {
+    border-bottom: 1px solid black;
+    list-style: none;
+    margin: 0 0 1.5rem 0;
+    padding: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.main-navigation ul li {
+    flex: 1 1 auto;
+    background-image: linear-gradient(to bottom, transparent 50%, #6c87b2 30%, #6c87b2 10%, #e87a7a 100%);
+    background-size: 100% 200%;
+    background-position: top center;
+    color: #666;
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.25s ease-in-out;
+}
+.main-navigation ul li:hover {
+    background-position: bottom center;
+    color: rgba(0, 0, 0, 0.75);
+}
+.main-navigation ul li a {
+    color: white;
+    display: block;
+    padding: 1rem 0;
+    transition: all 0.25s ease-in-out;
+    text-decoration: none;
+}
+
+/* 
+
+Restaurant menu styling
+
+*/
+
+.menu {
+    margin-bottom: 15px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.menu_restName {
+    text-align: center;
+    font-size: 70px;
+    margin-top: 0;
+}
+.menu_title {
+    text-align: center;
+}
+.menu_section {
+    margin-bottom: 30px;
+}
+.menu_section h3 {
+    font-style: italic;
+}
+.menu_item {
+    margin: 0 15px;
+    position: relative;
+}
+.menu_item h4 {
+    margin-bottom: 0px;
+}
+.price {
+    display: block;
+    float: right;
+    position: absolute;
+    bottom: 0px;
+    right: 0;
+    background-color: white;
+    font-weight: bold;
+}
+.description {
+    margin-top: 5px;
+    font-style: italic;
+    background-color: white;
+    display: inline-block;
+    max-width: 50%;
+}
+hr {
+    border: none;
+    border-top: 1px dotted black;
+    margin-top: -20px;
+}
+footer:not(.app-footer) {
+    text-align: center;
+    font-size: 11px;
+    font-style: italic;
+}
+
+/*
+
+    Form style
+
+*/
+
+form {
+	background:#fff;
+	padding:1em;
+	border:1px solid #eee;
+    margin:1em;
+	width:15em;
+}
+
+fieldset div {
+	margin:0.3em 0;
+	clear:both;
+}
+
+label {
+	float:none;
+	width:12em;
+	display:block;
+	clear:both;
+}
+
+legend {
+	color:#0b77b7;
+	font-size:1.4em;
+}
+
+legend span {
+	width:10em;
+	text-align:right;
+}
+
+input {
+	padding:0.15em;
+	width:10em;
+	border:1px solid #ddd;
+	background:#fafafa;
+	display:block;
+	float:left;
+}
+
+input:hover, input:focus {
+	border-color:#c5c5c5;
+	background:#f6f6f6;
+} 
+
+fieldset {
+	border:1px solid #ddd;
+	padding:0 0.5em 0.5em;
+}
+
+/*
+
+    Restyle for screen width
+
+*/
+
+@media all and (max-width: 600px) {
+    body {
+        font-size: 0.85em;
+    }
+
+    main,
+    section {
+        display: flex;
+        flex-flow: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .main-navigation {
+        display: flex;
+        flex-flow: column wrap;
+        padding: 0;
+    }
+
+    .main-navigation a {
+        justify-content: center;
+        text-align: center;
+        padding: 10px;
+        border-top: 1px solid rgba(255, 255, 255, 0.3);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .main-navigation li:last-of-type a {
+        justify-content: center;
+        border-bottom: none;
+    }
+
+    .menu_title {
+        text-align: center;
+        font-size: 30px;
+    }
+    .menu_section h3 {
+        text-align: center;
+        font-size: 30px;
+    }
+    .menu_item {
+        text-align: center;
+    }
+    .price {
+        float: none;
+        position: static;
+        margin-top: 15px;
+    }
+    hr {
+        display: none;
+    }
+}
