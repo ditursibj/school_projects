@@ -1,0 +1,268 @@
+mysql> USE DATABASE baseball_stats;
+ERROR 1049 (42000): Unknown database 'database'
+mysql> USE baseball_stats;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> SELECT DATABASE();
++----------------+
+| DATABASE()     |
++----------------+
+| baseball_stats |
++----------------+
+1 row in set (0.00 sec)
+
+mysql> ALTER TABLE teamstats ADD COLUMN team_id MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT FIRST, ADD PRIMARY KEY(team_id);
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM teamstats;
++---------+-------------------------------+-------+-------+--------+--------+----------+--------+
+| team_id | Team                          | Games | Wins  | Losses | AtBats | HomeRuns | BatAVG |
++---------+-------------------------------+-------+-------+--------+--------+----------+--------+
+|       1 | Arizona Diamondbacks          |  1819 |   914 |    905 |  62131 |     1933 |   0.26 |
+|       2 | Atlanta Braves                | 19764 |  9786 |   9825 | 677310 |    12203 |   0.26 |
+|       3 | Baltimore Orioles             | 16861 |  7965 |   8786 | 572146 |    11335 |  0.259 |
+|       4 | Boston Red Sox                | 16848 |  8657 |   8108 | 575510 |    11671 |  0.267 |
+|       5 | Chicago Cubs                  | 19796 | 10103 |   9537 | 678492 |    12479 |  0.264 |
+|       6 | Chicago White Sox             | 16855 |  8476 |   8276 | 570404 |     9662 |  0.261 |
+|       7 | Cincinnati Reds               | 19382 |  9766 |   9480 | 661241 |    11533 |  0.262 |
+|       8 | Cleveland Indians             | 16863 |  8571 |   8201 | 575356 |    11338 |  0.267 |
+|       9 | Colorado Rockies              |  2565 |  1203 |   1362 |  88540 |     2944 |  0.279 |
+|      10 | Detroit Tigers                | 16885 |  8497 |   8295 | 575699 |    12050 |  0.265 |
+|      11 | Florida Marlins               |  2561 |  1214 |   1347 |  87282 |     2392 |  0.261 |
+|      12 | Houston Astros                |  7526 |  3754 |   3766 | 255339 |     5533 |  0.255 |
+|      13 | Kansas City Royals            |  6380 |  3097 |   3281 | 218508 |     4777 |  0.265 |
+|      14 | Los Angeles Angels of Anaheim |  7684 |  3808 |   3873 | 260842 |     6374 |  0.258 |
+|      15 | Los Angeles Dodgers           | 19185 |  9985 |   9063 | 654177 |    11154 |  0.262 |
+|      16 | Milwaukee Brewers             |  6387 |  3031 |   3352 | 217387 |     5794 |  0.259 |
+|      17 | Minnesota Twins               | 16869 |  8069 |   8691 | 575390 |     9232 |  0.264 |
+|      18 | New York Mets                 |  7518 |  3606 |   3904 | 254460 |     5941 |   0.25 |
+|      19 | New York Yankees              | 16836 |  9491 |   7252 | 574293 |    13914 |  0.268 |
+|      20 | Oakland As                    | 16818 |  8127 |   8604 | 570335 |    11408 |  0.259 |
+|      21 | Philadelphia Phillies         | 19190 |  8964 |  10114 | 657092 |    11457 |  0.262 |
+|      22 | Pittsburgh Pirates            | 19343 |  9706 |   9501 | 663975 |     9970 |  0.265 |
+|      23 | San Diego Padres              |  6393 |  2948 |   3443 | 216951 |     4799 |  0.252 |
+|      24 | San Francisco Giants          | 19263 | 10274 |   8832 | 657818 |    13262 |  0.265 |
+|      25 | Seattle Mariners              |  5098 |  2393 |   2703 | 174802 |     4967 |  0.265 |
+|      26 | St. Louis Cardinals           | 19387 |  9950 |   9286 | 665624 |    10504 |  0.267 |
+|      27 | Tampa Bay Rays                |  1817 |   760 |   1057 |  62386 |     1713 |  0.262 |
+|      28 | Texas Rangers                 |  7671 |  3592 |   4073 | 262238 |     7249 |  0.259 |
+|      29 | Toronto Blue Jays             |  5101 |  2539 |   2559 | 175373 |     5018 |  0.264 |
+|      30 | Washington Nationals          |  6385 |  3050 |   3330 | 216094 |     4946 |  0.254 |
++---------+-------------------------------+-------+-------+--------+--------+----------+--------+
+30 rows in set (0.00 sec)
+
+mysql> CREATE TABLE champs (champ_id MEDIUMINT UNSIGNED NOT nD NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    -> team_id MEDIUMINT UNSIGNED NOT NULL INDEX,
+    -> pennants MEDIUMINT UNSIGNED NOT NULL,
+    -> worldseries MEDIUMINT UNSIGNED NOT NULL,
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'nD NOT NULL AUTO_INCREMENT PRIMARY KEY,
+team_id MEDIUMINT UNSIGNED NOT NULL INDE' at line 1
+mysql> CREATE TABLE champs (champ_id MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT, team_id MEDIUMINT UNSIGNED NOT NULL INDEX, pennants MEDIUMINT UNSIGNED NOT NULL, worldseries MEDIUMINT UNSIGNED NOT NULL, PRIMARY KEY (champ_id));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'INDEX, pennants MEDIUMINT UNSIGNED NOT NULL, worldseries MEDIUMINT UNSIGNED NOT ' at line 1
+mysql> CREATE TABLE champs (champ_id MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT,
+    -> team_id MEDIUMINT UNSIGNED NOT NULL,
+    -> pennants MEDIUMINT UNSIGNED NOT NULL,
+    -> worldseries MEDIUMINT UNSIGNED NOT NULL,
+    -> PRIMARY KEY (champ_id)
+    -> );
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> INDEX (team_id);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'INDEX (team_id)' at line 1
+mysql> 
+mysql> DROP TABLE champs;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> CREATE TABLE champs (champ_id MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT,
+    -> team_id MEDIUMINT UNSIGNED NOT NULL INDEX,
+    -> pennants MEDIUMINT UNSIGNED NOT NULL,
+    -> worldseries MEDIUMINT UNSIGNED NOT NULL,
+    -> PRIMARY KEY (champ_id)
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'INDEX,
+pennants MEDIUMINT UNSIGNED NOT NULL,
+worldseries MEDIUMINT UNSIGNED NOT ' at line 2
+mysql> CREATE TABLE champs (champ_id MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT,
+    ->     -> team_id MEDIUMINT UNSIGNED NOT NULL INDEX,
+    ->     -> pennants MEDIUMINT UNSIGNED NOT NULL,
+    ->     -> worldseries MEDIUMINT UNSIGNED NOT NULL,
+    ->     -> PRIMARY KEY (champ_id)
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-> team_id MEDIUMINT UNSIGNED NOT NULL INDEX,
+    -> pennants MEDIUMINT UNSIGNED' at line 2
+mysql> CREATE TABLE champs (champ_id MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT,
+    -> team_id MEDIUMINT UNSIGNED NOT NULL,
+    -> pennants MEDIUMINT UNSIGNED NOT NULL,
+    -> worldseries MEDIUMINT UNSIGNED NOT NULL,
+    -> PRIMARY KEY (champ_id),
+    -> INDEX (team_id)
+    -> );
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> FOREIGN KEY team_id REFERENCES teamstats (team_id) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FOREIGN KEY team_id REFERENCES teamstats (team_id) ON DELETE NO ACTION ON UPDATE' at line 1
+mysql> DESCRIBE champs;
++-------------+-----------------------+------+-----+---------+----------------+
+| Field       | Type                  | Null | Key | Default | Extra          |
++-------------+-----------------------+------+-----+---------+----------------+
+| champ_id    | mediumint(8) unsigned | NO   | PRI | NULL    | auto_increment |
+| team_id     | mediumint(8) unsigned | NO   | MUL | NULL    |                |
+| pennants    | mediumint(8) unsigned | NO   |     | NULL    |                |
+| worldseries | mediumint(8) unsigned | NO   |     | NULL    |                |
++-------------+-----------------------+------+-----+---------+----------------+
+4 rows in set (0.00 sec)
+
+mysql> DROP TABLE champs;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> CREATE TABLE champs (champ_id MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT,
+    -> team_id MEDIUMINT UNSIGNED NOT NULL,
+    -> pennants MEDIUMINT UNSIGNED NOT NULL,
+    -> worldseries MEDIUMINT UNSIGNED NOT NULL,
+    -> PRIMARY KEY (champ_id),
+    -> FOREIGN KEY (team_id) REFERENCES teamstats (team_id) ON DELETE NO ACTION ON UPDATE NO ACTION,
+    -> INDEX (team_id)
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> DESCRIBE champs;
++-------------+-----------------------+------+-----+---------+----------------+
+| Field       | Type                  | Null | Key | Default | Extra          |
++-------------+-----------------------+------+-----+---------+----------------+
+| champ_id    | mediumint(8) unsigned | NO   | PRI | NULL    | auto_increment |
+| team_id     | mediumint(8) unsigned | NO   | MUL | NULL    |                |
+| pennants    | mediumint(8) unsigned | NO   |     | NULL    |                |
+| worldseries | mediumint(8) unsigned | NO   |     | NULL    |                |
++-------------+-----------------------+------+-----+---------+----------------+
+4 rows in set (0.01 sec)
+
+mysql> INSERT INTO champs (team_id, pennants, worldseries) VALUES (1, 1, 1), (2, 17, 3);
+Query OK, 2 rows affected (0.01 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM champs;
++----------+---------+----------+-------------+
+| champ_id | team_id | pennants | worldseries |
++----------+---------+----------+-------------+
+|        1 |       1 |        1 |           1 |
+|        2 |       2 |       17 |           3 |
++----------+---------+----------+-------------+
+2 rows in set (0.00 sec)
+
+mysql> INSERT INTO champs (team_id, pennants, worldseries) VALUES
+    -> (3, 7, 26)
+    -> (4, 12, 7)
+    -> (5, 16, 2)
+    -> (6, 6, 3)
+    -> (7, 10, 5)
+    -> (8, 5, 2)
+    -> (9, 1, 0)
+    -> (10, 10, 4)
+    -> (11, 2, 2)
+    -> (12, 1, 0)
+    -> (13, 2, 1)
+    -> (14, 1, 1)
+    -> (15, 22, 6)
+    -> (16, 1, 0)
+    -> (17, 6, 3)
+    -> (18, 4, 2)
+    -> (19, 39, 26)
+    -> (20, 15, 9)
+    -> (21, 6, 2)
+    -> (22, 9, 5)
+    -> (23, 2, 0)
+    -> (24, 20, 5)
+    -> (25, 0, 0)
+    -> (26, 21, 10)
+    -> (27, 1, 0)
+    -> (28, 0, 0)
+    -> (29, 2, 2)
+    -> (30, 0, 0)
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(4, 12, 7)
+(5, 16, 2)
+(6, 6, 3)
+(7, 10, 5)
+(8, 5, 2)
+(9, 1, 0)
+(10, 10, 4)
+(11, ' at line 3
+mysql> INSERT INTO champs (team_id, pennants, worldseries) VALUES
+    -> (3, 7, 26),
+    -> (4, 12, 7),
+    -> (5, 16, 2),
+    -> (6, 6, 3),
+    -> (7, 10, 5),
+    -> (8, 5, 2),
+    -> (9, 1, 0),
+    -> (10, 10, 4),
+    -> (11, 2, 2),
+    -> (12, 1, 0),
+    -> (13, 2, 1),
+    -> (14, 1, 1),
+    -> (15, 22, 6),
+    -> (16, 1, 0),
+    -> (17, 6, 3),
+    -> (18, 4, 2),
+    -> (19, 39, 26),
+    -> (20, 15, 9),
+    -> (21, 6, 2),
+    -> (22, 9, 5),
+    -> (23, 2, 0),
+    -> (24, 20, 5),
+    -> (25, 0, 0),
+    -> (26, 21, 10),
+    -> (27, 1, 0),
+    -> (28, 0, 0),
+    -> (29, 2, 2),
+    -> (30, 0, 0)
+    -> ;
+Query OK, 28 rows affected (0.00 sec)
+Records: 28  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM champs;
++----------+---------+----------+-------------+
+| champ_id | team_id | pennants | worldseries |
++----------+---------+----------+-------------+
+|        1 |       1 |        1 |           1 |
+|        2 |       2 |       17 |           3 |
+|        3 |       3 |        7 |          26 |
+|        4 |       4 |       12 |           7 |
+|        5 |       5 |       16 |           2 |
+|        6 |       6 |        6 |           3 |
+|        7 |       7 |       10 |           5 |
+|        8 |       8 |        5 |           2 |
+|        9 |       9 |        1 |           0 |
+|       10 |      10 |       10 |           4 |
+|       11 |      11 |        2 |           2 |
+|       12 |      12 |        1 |           0 |
+|       13 |      13 |        2 |           1 |
+|       14 |      14 |        1 |           1 |
+|       15 |      15 |       22 |           6 |
+|       16 |      16 |        1 |           0 |
+|       17 |      17 |        6 |           3 |
+|       18 |      18 |        4 |           2 |
+|       19 |      19 |       39 |          26 |
+|       20 |      20 |       15 |           9 |
+|       21 |      21 |        6 |           2 |
+|       22 |      22 |        9 |           5 |
+|       23 |      23 |        2 |           0 |
+|       24 |      24 |       20 |           5 |
+|       25 |      25 |        0 |           0 |
+|       26 |      26 |       21 |          10 |
+|       27 |      27 |        1 |           0 |
+|       28 |      28 |        0 |           0 |
+|       29 |      29 |        2 |           2 |
+|       30 |      30 |        0 |           0 |
++----------+---------+----------+-------------+
+30 rows in set (0.00 sec)
+
+mysql> INSERT INTO champs (team_id, pennants, worldseries) VALUES (31, 1, 1);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`baseball_stats`.`champs`, CONSTRAINT `champs_ibfk_1` FOREIGN KEY (`team_id`) REFERENCES `teamstats` (`team_id`)ON DELETE NO ACTION ON UPDATE NO ACTION)
+mysql> DELETE FROM teamstats WHERE team_id=2;
+ERROR 1451 (23000): Cannot delete or update a parent row: a foreign key constraint fails (`baseball_stats`.`champs`, CONSTRAINT `champs_ibfk_1` FOREIGN KEY (`team_id`) REFERENCES `teamstats` (`team_id`)ON DELETE NO ACTION ON UPDATE NO ACTION)
+mysql> quit

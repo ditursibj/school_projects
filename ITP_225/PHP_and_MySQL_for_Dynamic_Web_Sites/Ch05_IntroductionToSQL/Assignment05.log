@@ -1,0 +1,266 @@
+mysql> CREATE DATABASE baseball_stats;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> USE baseball_stats;
+Database changed
+mysql> SELECT DATABASE();
++----------------+
+| DATABASE()     |
++----------------+
+| baseball_stats |
++----------------+
+1 row in set (0.00 sec)
+
+mysql> CREATE TABLE teamstats;
+ERROR 1113 (42000): A table must have at least 1 column
+mysql> CREATE TABLE teamstats (Team VARCHAR(50), Games INT, Wins INT, Losses INT, AtBats INT, HomeRuns INT, BatAVG FLOAT);
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> DESCRIBE teamstats
+    -> Describe teamstats;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Describe teamstats' at line 2
+mysql> DESCRIBE teamstats;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| Team     | varchar(50) | YES  |     | NULL    |       |
+| Games    | int(11)     | YES  |     | NULL    |       |
+| Wins     | int(11)     | YES  |     | NULL    |       |
+| Losses   | int(11)     | YES  |     | NULL    |       |
+| AtBats   | int(11)     | YES  |     | NULL    |       |
+| HomeRuns | int(11)     | YES  |     | NULL    |       |
+| BatAVG   | float       | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+7 rows in set (0.00 sec)
+
+mysql> LOAD DATA INFILE'Applications/MAMP/htdocs/ch05 SQL/newteams.txt' INTO TABLE teamstats;
+ERROR 1290 (HY000): The MySQL server is running with the --secure-file-priv option so it cannot execute this statement
+mysql> LOAD DATA LOCAL INFILE'Applications/MAMP/htdocs/ch05 SQL/newteams.txt' INTO TABLE teamstats;
+ERROR 2 (HY000): File 'Applications/MAMP/htdocs/ch05 SQL/newteams.txt' not found (Errcode: 2 - No such file or directory)
+mysql> LOAD DATA LOCAL INFILE '/Applications/MAMP/htdocs/ch05 SQL/newteams.txt' INTO TABLE teamstats;
+Query OK, 30 rows affected (0.00 sec)
+Records: 30  Deleted: 0  Skipped: 0  Warnings: 0
+
+mysql> SELECT * FROM teamstats;
++-------------------------------+-------+-------+--------+--------+----------+--------+
+| Team                          | Games | Wins  | Losses | AtBats | HomeRuns | BatAVG |
++-------------------------------+-------+-------+--------+--------+----------+--------+
+| Arizona Diamondbacks          |  1819 |   914 |    905 |  62131 |     1933 |   0.26 |
+| Atlanta Braves                | 19764 |  9786 |   9825 | 677310 |    12203 |   0.26 |
+| Baltimore Orioles             | 16861 |  7965 |   8786 | 572146 |    11335 |  0.259 |
+| Boston Red Sox                | 16848 |  8657 |   8108 | 575510 |    11671 |  0.267 |
+| Chicago Cubs                  | 19796 | 10103 |   9537 | 678492 |    12479 |  0.264 |
+| Chicago White Sox             | 16855 |  8476 |   8276 | 570404 |     9662 |  0.261 |
+| Cincinnati Reds               | 19382 |  9766 |   9480 | 661241 |    11533 |  0.262 |
+| Cleveland Indians             | 16863 |  8571 |   8201 | 575356 |    11338 |  0.267 |
+| Colorado Rockies              |  2565 |  1203 |   1362 |  88540 |     2944 |  0.279 |
+| Detroit Tigers                | 16885 |  8497 |   8295 | 575699 |    12050 |  0.265 |
+| Florida Marlins               |  2561 |  1214 |   1347 |  87282 |     2392 |  0.261 |
+| Houston Astros                |  7526 |  3754 |   3766 | 255339 |     5533 |  0.255 |
+| Kansas City Royals            |  6380 |  3097 |   3281 | 218508 |     4777 |  0.265 |
+| Los Angeles Angels of Anaheim |  7684 |  3808 |   3873 | 260842 |     6374 |  0.258 |
+| Los Angeles Dodgers           | 19185 |  9985 |   9063 | 654177 |    11154 |  0.262 |
+| Milwaukee Brewers             |  6387 |  3031 |   3352 | 217387 |     5794 |  0.259 |
+| Minnesota Twins               | 16869 |  8069 |   8691 | 575390 |     9232 |  0.264 |
+| New York Mets                 |  7518 |  3606 |   3904 | 254460 |     5941 |   0.25 |
+| New York Yankees              | 16836 |  9491 |   7252 | 574293 |    13914 |  0.268 |
+| Oakland Athletics             | 16818 |  8127 |   8604 | 570335 |    11408 |  0.259 |
+| Philadelphia Phillies         | 19190 |  8964 |  10114 | 657092 |    11457 |  0.262 |
+| Pittsburgh Pirates            | 19343 |  9706 |   9501 | 663975 |     9970 |  0.265 |
+| San Diego Padres              |  6393 |  2948 |   3443 | 216951 |     4799 |  0.252 |
+| San Francisco Giants          | 19263 | 10274 |   8832 | 657818 |    13262 |  0.265 |
+| Seattle Mariners              |  5098 |  2393 |   2703 | 174802 |     4967 |  0.265 |
+| St. Louis Cardinals           | 19387 |  9950 |   9286 | 665624 |    10504 |  0.267 |
+| Tampa Bay Rays                |  1817 |   760 |   1057 |  62386 |     1713 |  0.262 |
+| Texas Rangers                 |  7671 |  3592 |   4073 | 262238 |     7249 |  0.259 |
+| Toronto Blue Jays             |  5101 |  2539 |   2559 | 175373 |     5018 |  0.264 |
+| Washington Nationals          |  6385 |  3050 |   3330 | 216094 |     4946 |  0.254 |
++-------------------------------+-------+-------+--------+--------+----------+--------+
+30 rows in set (0.00 sec)
+
+mysql> SELECT Team, Games, AtBats FROM teamstats;
++-------------------------------+-------+--------+
+| Team                          | Games | AtBats |
++-------------------------------+-------+--------+
+| Arizona Diamondbacks          |  1819 |  62131 |
+| Atlanta Braves                | 19764 | 677310 |
+| Baltimore Orioles             | 16861 | 572146 |
+| Boston Red Sox                | 16848 | 575510 |
+| Chicago Cubs                  | 19796 | 678492 |
+| Chicago White Sox             | 16855 | 570404 |
+| Cincinnati Reds               | 19382 | 661241 |
+| Cleveland Indians             | 16863 | 575356 |
+| Colorado Rockies              |  2565 |  88540 |
+| Detroit Tigers                | 16885 | 575699 |
+| Florida Marlins               |  2561 |  87282 |
+| Houston Astros                |  7526 | 255339 |
+| Kansas City Royals            |  6380 | 218508 |
+| Los Angeles Angels of Anaheim |  7684 | 260842 |
+| Los Angeles Dodgers           | 19185 | 654177 |
+| Milwaukee Brewers             |  6387 | 217387 |
+| Minnesota Twins               | 16869 | 575390 |
+| New York Mets                 |  7518 | 254460 |
+| New York Yankees              | 16836 | 574293 |
+| Oakland Athletics             | 16818 | 570335 |
+| Philadelphia Phillies         | 19190 | 657092 |
+| Pittsburgh Pirates            | 19343 | 663975 |
+| San Diego Padres              |  6393 | 216951 |
+| San Francisco Giants          | 19263 | 657818 |
+| Seattle Mariners              |  5098 | 174802 |
+| St. Louis Cardinals           | 19387 | 665624 |
+| Tampa Bay Rays                |  1817 |  62386 |
+| Texas Rangers                 |  7671 | 262238 |
+| Toronto Blue Jays             |  5101 | 175373 |
+| Washington Nationals          |  6385 | 216094 |
++-------------------------------+-------+--------+
+30 rows in set (0.00 sec)
+
+mysql> SELECT Team, Games, AtBats FROM teamstats ORDER BY team;
++-------------------------------+-------+--------+
+| Team                          | Games | AtBats |
++-------------------------------+-------+--------+
+| Arizona Diamondbacks          |  1819 |  62131 |
+| Atlanta Braves                | 19764 | 677310 |
+| Baltimore Orioles             | 16861 | 572146 |
+| Boston Red Sox                | 16848 | 575510 |
+| Chicago Cubs                  | 19796 | 678492 |
+| Chicago White Sox             | 16855 | 570404 |
+| Cincinnati Reds               | 19382 | 661241 |
+| Cleveland Indians             | 16863 | 575356 |
+| Colorado Rockies              |  2565 |  88540 |
+| Detroit Tigers                | 16885 | 575699 |
+| Florida Marlins               |  2561 |  87282 |
+| Houston Astros                |  7526 | 255339 |
+| Kansas City Royals            |  6380 | 218508 |
+| Los Angeles Angels of Anaheim |  7684 | 260842 |
+| Los Angeles Dodgers           | 19185 | 654177 |
+| Milwaukee Brewers             |  6387 | 217387 |
+| Minnesota Twins               | 16869 | 575390 |
+| New York Mets                 |  7518 | 254460 |
+| New York Yankees              | 16836 | 574293 |
+| Oakland Athletics             | 16818 | 570335 |
+| Philadelphia Phillies         | 19190 | 657092 |
+| Pittsburgh Pirates            | 19343 | 663975 |
+| San Diego Padres              |  6393 | 216951 |
+| San Francisco Giants          | 19263 | 657818 |
+| Seattle Mariners              |  5098 | 174802 |
+| St. Louis Cardinals           | 19387 | 665624 |
+| Tampa Bay Rays                |  1817 |  62386 |
+| Texas Rangers                 |  7671 | 262238 |
+| Toronto Blue Jays             |  5101 | 175373 |
+| Washington Nationals          |  6385 | 216094 |
++-------------------------------+-------+--------+
+30 rows in set (0.00 sec)
+
+mysql> SELECT Team, Games, AtBats FROM teamstats ORDER BY team DESC;
++-------------------------------+-------+--------+
+| Team                          | Games | AtBats |
++-------------------------------+-------+--------+
+| Washington Nationals          |  6385 | 216094 |
+| Toronto Blue Jays             |  5101 | 175373 |
+| Texas Rangers                 |  7671 | 262238 |
+| Tampa Bay Rays                |  1817 |  62386 |
+| St. Louis Cardinals           | 19387 | 665624 |
+| Seattle Mariners              |  5098 | 174802 |
+| San Francisco Giants          | 19263 | 657818 |
+| San Diego Padres              |  6393 | 216951 |
+| Pittsburgh Pirates            | 19343 | 663975 |
+| Philadelphia Phillies         | 19190 | 657092 |
+| Oakland Athletics             | 16818 | 570335 |
+| New York Yankees              | 16836 | 574293 |
+| New York Mets                 |  7518 | 254460 |
+| Minnesota Twins               | 16869 | 575390 |
+| Milwaukee Brewers             |  6387 | 217387 |
+| Los Angeles Dodgers           | 19185 | 654177 |
+| Los Angeles Angels of Anaheim |  7684 | 260842 |
+| Kansas City Royals            |  6380 | 218508 |
+| Houston Astros                |  7526 | 255339 |
+| Florida Marlins               |  2561 |  87282 |
+| Detroit Tigers                | 16885 | 575699 |
+| Colorado Rockies              |  2565 |  88540 |
+| Cleveland Indians             | 16863 | 575356 |
+| Cincinnati Reds               | 19382 | 661241 |
+| Chicago White Sox             | 16855 | 570404 |
+| Chicago Cubs                  | 19796 | 678492 |
+| Boston Red Sox                | 16848 | 575510 |
+| Baltimore Orioles             | 16861 | 572146 |
+| Atlanta Braves                | 19764 | 677310 |
+| Arizona Diamondbacks          |  1819 |  62131 |
++-------------------------------+-------+--------+
+30 rows in set (0.00 sec)
+
+mysql> SELECT team, homeRuns FROM teamstats ORDER BY homeRuns LIMIT 1;
++----------------+----------+
+| team           | homeRuns |
++----------------+----------+
+| Tampa Bay Rays |     1713 |
++----------------+----------+
+1 row in set (0.00 sec)
+
+mysql> SELECT team, homeRuns, FROM teamstats ORDER BY homeRuns DESC LIMIT 1;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FROM teamstats ORDER BY homeRuns DESC LIMIT 1' at line 1
+mysql> SELECT team, homeRuns FROM teamstats ORDER BY homeRuns DESC LIMIT 1;
++------------------+----------+
+| team             | homeRuns |
++------------------+----------+
+| New York Yankees |    13914 |
++------------------+----------+
+1 row in set (0.00 sec)
+
+mysql> SELECT SUM(games)/2 FROM teamstats;
++--------------+
+| SUM(games)/2 |
++--------------+
+|  182525.0000 |
++--------------+
+1 row in set (0.01 sec)
+
+mysql> SELECT AVG(batAvg) FROM teamstats;
++---------------------+
+| AVG(batAvg)         |
++---------------------+
+| 0.26199999650319417 |
++---------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT SUM(batAvg*atBats) FROM teamstats;
++--------------------+
+| SUM(batAvg*atBats) |
++--------------------+
+| 3270763.9265753925 |
++--------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT SUM(batAvg*atBats)/sum(atBats) FROM teamstats;
++--------------------------------+
+| SUM(batAvg*atBats)/sum(atBats) |
++--------------------------------+
+|             0.2625602253617602 |
++--------------------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT team FROM teamstats WHERE team = "Oakland Athletics";
++-------------------+
+| team              |
++-------------------+
+| Oakland Athletics |
++-------------------+
+1 row in set (0.00 sec)
+
+mysql> UPDATE team SET team = "Oakland As" WHERE team = "Oakland Athletics" LIMIT 1;
+ERROR 1146 (42S02): Table 'baseball_stats.team' doesn't exist
+mysql> UPDATE teamstats SET team = "Oakland As" WHERE team = "Oakland Athletics" LIMIT 1;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SELECT team WHERE team = "Oakland As";
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE team = "Oakland As"' at line 1
+mysql> SELECT team FROM teamstats WHERE team = "Oakland As";
++------------+
+| team       |
++------------+
+| Oakland As |
++------------+
+1 row in set (0.00 sec)
+
+mysql> exit

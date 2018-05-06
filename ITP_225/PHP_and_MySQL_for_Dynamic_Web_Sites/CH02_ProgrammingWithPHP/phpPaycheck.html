@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<title>Paycheck Calculator</title>
+	<link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+<!-- Script 2.1 - form.html -->
+
+<form action="phpPaycheck2.php" method="post">
+
+	<fieldset>
+		<p>Use This Form To Calculate the Regular Pay, Overtime Pay, Gross Pay and Net Pay for an Employee.</p>
+		<div><label for="firstName">First Name</label><input type="text" name="firstName" id ="firstName"/></div>
+		<div><label for="lastName">Last Name</label><input type="text" name="lastName" id ="lastName"/></div>
+		<div><label for="hoursWorked">Hours Worked (between 0 and 80)</label><input type="number" name="hoursWorked" id="hoursWorked" value="0"/></div>
+		<div><label for="hourlyRate">Hourly Rate (between 0 and 100.00)</label><input type="number" name="hourlyRate" id ="hourlyRate" value="0"/></div>
+		<div><input type="submit" value="Calculate" id="submit"/></div>	
+	</fieldset>
+
+</form>
+
+</body>
+</html>

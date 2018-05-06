@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Slideshow</title>
+	<!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->  
+    <script type="text/javascript">
+    	var dcLandmarks = new Array();
+		var interval = 0;
+		var timer = 3000;
+
+		dcLandmarks[0] = new Image();
+		dcLandmarks[0].src = "images/adamsMorganDC.jpeg";
+		dcLandmarks[1] = new Image();
+		dcLandmarks[1].src = "images/lafayetteParkDC.jpeg";
+		dcLandmarks[2] = new Image();
+		dcLandmarks[2].src = "images/lincolnMemorial.jpeg";
+		dcLandmarks[3] = new Image();
+		dcLandmarks[3].src = "images/washingtonMonument.jpeg";
+		dcLandmarks[4] = new Image();
+		dcLandmarks[4].src = "images/whitehouse.jpeg";
+
+		function changeMonument() {
+			var size = dcLandmarks.length - 1;
+			if(interval < size) {
+		    	interval++;		
+			} else {
+		    	interval = 0;
+			}			
+			document.monument.src = dcLandmarks[interval].src;
+			timeout = setTimeout('changeMonument()', timer);
+		}		
+		function stopPresentation() {
+			clearTimeout(timeout);
+		}
+    </script>
+</head>
+<body bgcolor="cornflowerblue">
+    <div align="center"><font face="arial"></font>
+    <h2>The 4 Seasons</h2><b>
+	To see slide show, put your mouse on the image.<br />
+	Move your mouse away from the image, to stop it.
+    <a href="javascript:void(null);"
+		onMouseOver="return changeMonument();"
+		onMouseOut="return stopPresentation();">
+        <img name="monument" src="images/adamsMorganDC.jpeg" align="left" border=8 hspace="10" width="111" height="333">
+    </a>
+	<br />
+    </div>
+</body>
+</html>
